@@ -108,7 +108,7 @@
 
             <tr>
                 <td colspan="10" align="center">
-                    <a class="btn btn-primary" href="add.jsp">添加联系人</a>
+                    <a class="btn btn-primary" href="add.jsp">添加联系人233</a>
                     <a class="btn btn-primary" id="delSelected" href="javascript:void(0);">删除选中</a>
                 </td>
 
