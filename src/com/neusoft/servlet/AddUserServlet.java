@@ -41,13 +41,15 @@ public class AddUserServlet extends HttpServlet {
         int result = new UserDaoImpl().addUser(user);
         session.setAttribute("msg","");
         if (result!=0){
-            session.setAttribute("msg","添加成功");
+            session.setAttribute("msg", "添加成功");
             List<User> users = new UserDaoImpl().findAll();
-            session.setAttribute("users",users);
-            req.getRequestDispatcher("/list.jsp").forward(req,resp);
+            session.setAttribute("users", users);
+            resp.sendRedirect("/list.jsp");
+            //req.getRequestDispatcher("/list.jsp").forward(req,resp);
         }else {
-            session.setAttribute("msg","添加失败请重新添加");
-            req.getRequestDispatcher("/add.jsp").forward(req,resp);
+            session.setAttribute("msg", "添加失败请重新添加");
+            resp.sendRedirect("/add.jsp");
+            //req.getRequestDispatcher("/add.jsp").forward(req,resp);
         }
 
 

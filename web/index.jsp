@@ -20,9 +20,9 @@
   <body>
 
   <div align="center">
-  	<a
-            href="list.jsp" style="text-decoration:none;font-size:33px">查询所有用户信息
-	</a>
+    <a
+            href="${pageContext.request.contextPath}/userListServlet" style="text-decoration:none;font-size:33px">查询所有用户信息
+    </a>
   </div>
   </body>
 </html>

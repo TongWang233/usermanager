@@ -32,8 +32,6 @@ public class UserLoginServlet extends HttpServlet {
         User user = new UserDaoImpl().login(uname,pwd);
         if (verifycode.equalsIgnoreCase(checkCode)){
             if (user!=null){
-                List<User> users = new UserDaoImpl().findAll();
-                session.setAttribute("users",users);
                 req.getRequestDispatcher("/index.jsp").forward(req,resp);
             }else {
                 session.setAttribute("login_msg","账户或者密码错误");

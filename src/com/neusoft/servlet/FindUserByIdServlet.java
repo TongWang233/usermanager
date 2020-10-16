@@ -29,8 +29,9 @@ public class FindUserByIdServlet extends HttpServlet {
             req.setAttribute("user",user);
             req.getRequestDispatcher("/update.jsp").forward(req,resp);
         }else{
-            session.setAttribute("msg","修改失败");
-            req.getRequestDispatcher("/list.jsp").forward(req,resp);
+            session.setAttribute("msg", "修改失败");
+            resp.sendRedirect("/list.jsp");
+            //  req.getRequestDispatcher("/list.jsp").forward(req,resp);
         }
 
     }

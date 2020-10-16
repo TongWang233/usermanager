@@ -24,9 +24,11 @@ public class UpdateUserServlet extends HttpServlet {
             e1.printStackTrace();
         }
         HttpSession session = req.getSession();
-        String id = req.getParameter("id");
+        String id = req.getParameter("id") == null ? "1"
+                : req.getParameter("id");
         String name = req.getParameter("name");
-        String age = req.getParameter("age");
+        String age = req.getParameter("age") == null ? "1"
+                : req.getParameter("age");
         String qq = req.getParameter("qq");
         String email = req.getParameter("email");
         String sex = req.getParameter("sex");
@@ -41,14 +43,15 @@ public class UpdateUserServlet extends HttpServlet {
         user.setAge(Integer.parseInt(age));
         int result = new UserDaoImpl().updateUser(user);
         session.setAttribute("msg","");
-        if (result!=0){
-            session.setAttribute("msg","修改成功");
+        if (result!=0) {
+            session.setAttribute("msg", "修改成功");
             List<User> users = new UserDaoImpl().findAll();
-            session.setAttribute("users",users);
-            req.getRequestDispatcher("/list.jsp").forward(req,resp);
-        }else{
-            session.setAttribute("msg","修改失败");
-            req.getRequestDispatcher("/list.jsp").forward(req,resp);
+            session.setAttribute("users", users);
+            resp.sendRedirect("/userListServlet");
+            //req.getRequestDispatcher("/list.jsp").forward(req,resp);
+        }else {
+            resp.sendRedirect("/list.jsp");
+            //req.getRequestDispatcher("/list.jsp").forward(req,resp);
         }
 
     }

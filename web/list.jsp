@@ -31,50 +31,90 @@
 <body>
 <script type="text/javascript">
     <%
-                List<User> users = (List<User>) session.getAttribute("users");
                 String msg = (String) session.getAttribute("msg");
-                if (msg!=null) {
+                if (msg!=""&&msg!=null) {
                     out.print("alert('"+msg+"');");
                     session.setAttribute("msg","");
                 }
 
     %>
 
+    function delUser(id) {
+        if (confirm("您确定删除本条记录吗?")) {
+            location.href = "${pageContext.request.contextPath}/deleteUserServlet?id=" + id;
+        }
+    }
+
+    window.onload = function () {
+        document.getElementById("delSelected").onclick = function () {
+            if (confirm("您确定删除本条记录吗?")) {
+                var flag = false;
+                var cbs = document.getElementsByName("uid");
+                for (var i = 0; i < cbs.length; i++) {
+                    if (cbs[i].checked) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag) {
+                    document.getElementById("myform").submit();
+                }
+            }
+        }
+
+
+        document.getElementById("firstCb").onclick = function () {
+            var cbs = document.getElementsByName("uid");
+            for (var i = 0; i < cbs.length; i++) {
+                cbs[i].checked = this.checked;
+            }
+        }
+    }
 </script>
+
 <div class="container">
     <h3 style="text-align: center">用户信息列表</h3>
-    <table border="1" class="table table-bordered table-hover">
-        <tr class="success">
-            <th>编号</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>年龄</th>
-            <th>籍贯</th>
-            <th>QQ</th>
-            <th>邮箱</th>
-            <th>操作</th>
-        </tr>
-        <%
-            for(User user:users){
-        %>
-        <tr class="success">
-            <th><%=user.getId()%></th>
-            <th><%=user.getUsername()%></th>
-            <th><%=user.getGender()%></th>
-            <th><%=user.getAge()%></th>
-            <th><%=user.getAddress()%></th>
-            <th><%=user.getQq()%></th>
-            <th><%=user.getEmail()%></th>
-            <td><a class="btn btn-default btn-sm" href="findUserByIdServlet?id=<%=user.getId()%>">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="deleteUserServlet?id=<%=user.getId()%>">删除</a></td>
-        </tr>
-        <%
-            }
-        %>
+    <form action="${pageContext.request.contextPath}/delSelectedServlet" method="post" id="myform">
+        <table border="1" class="table table-bordered table-hover">
+            <tr class="success">
+                <th><input type="checkbox" id="firstCb"></th>
+                <th>编号</th>
+                <th>id</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>籍贯</th>
+                <th>QQ</th>
+                <th>邮箱</th>
+                <th>操作</th>
+            </tr>
+            <c:forEach items="${users}" var="user" varStatus="s">
+                <tr class="success">
+                    <td><input type="checkbox" name="uid" value="${user.id}"></td>
+                    <th>${s.count}</th>
+                    <th>${user.id}</th>
+                    <th>${user.username}</th>
+                    <th>${user.gender}</th>
+                    <th>${user.age}</th>
+                    <th>${user.address}</th>
+                    <th>${user.qq}</th>
+                    <th>${user.email}</th>
+                    <td>
+                        <a class="btn btn-default btn-sm" href="findUserByIdServlet?id=${user.id}">修改</a>&nbsp;
+                        <a class="btn btn-default b（）tn-sm" href="javascript:delUser(${user.id})">删除</a>
+                    </td>
+                </tr>
+            </c:forEach>
 
-        <tr>
-            <td colspan="8" align="center"><a class="btn btn-primary" href="add.jsp">添加联系人</a></td>
-        </tr>
-    </table>
+            <tr>
+                <td colspan="10" align="center">
+                    <a class="btn btn-primary" href="add.jsp">添加联系人</a>
+                    <a class="btn btn-primary" id="delSelected" href="javascript:void(0);">删除选中</a>
+                </td>
+
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>

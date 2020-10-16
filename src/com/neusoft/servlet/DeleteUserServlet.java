@@ -27,15 +27,17 @@ public class DeleteUserServlet extends HttpServlet {
       String id = req.getParameter("id");
       int result = new UserDaoImpl().delUser(Integer.parseInt(id));
       if (result!=0){
-          session.setAttribute("msg","删除成功");
+          session.setAttribute("msg", "删除成功");
           List<User> users = new UserDaoImpl().findAll();
-          session.setAttribute("users",users);
-          req.getRequestDispatcher("/list.jsp").forward(req,resp);
+          session.setAttribute("users", users);
+          resp.sendRedirect("/list.jsp");
+          // req.getRequestDispatcher("/list.jsp").forward(req,resp);
       }else {
-          session.setAttribute("msg","删除失败");
+          session.setAttribute("msg", "删除失败");
           List<User> users = new UserDaoImpl().findAll();
-          session.setAttribute("users",users);
-          req.getRequestDispatcher("/list.jsp").forward(req,resp);
+          session.setAttribute("users", users);
+          resp.sendRedirect("/list.jsp");
+          //req.getRequestDispatcher("/list.jsp").forward(req,resp);
       }
 
 

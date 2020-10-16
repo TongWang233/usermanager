@@ -16,34 +16,34 @@
         
     </head>
     <%
-    User user = (User) request.getAttribute("user");
+        User user = (User) request.getAttribute("user");
         String msg = (String) session.getAttribute("msg");
-        if (msg!=null) {
-            out.print("alert('"+msg+"');");
+        if (msg != "" && msg != null) {
+            out.print("alert('" + msg + "');");
+            session.setAttribute("msg", "");
         }
     %>
     <body>
-        <div class="container" style="width: 400px;">
-        <h3 style="text-align: center;">修改联系人22</h3>
-        <form action="updateUserServlet" method="post">
+    <div class="container" style="width: 400px;">
+        <h3 style="text-align: center;">修改联系人</h3>
+        <form action="${pageContext.request.contextPath}/updateUserServlet" method="post">
             <div class="form-group">
-                <label>编号：</label>
-                <input type="text" class="form-control"  name="id" value="<%=user.getId()%>" >
+                <input type="hidden" class="form-control" name="id" value="<%=user.getId()%>">
             </div>
 
-                <div class="form-group">
-                    <label >姓名：</label>
-                    <input type="text" class="form-control" name="name" value="<%=user.getUsername()%>" >
-                </div>
+            <div class="form-group">
+                <label>姓名：</label>
+                <input type="text" class="form-control" readonly="readonly" name="name" value="<%=user.getUsername()%>">
+            </div>
 
-                <div class="form-group">
-                    <label>性别：</label>
-                    <input type="radio" name="sex" value="男" checked="checked"/>男
-                    <input type="radio" name="sex" value="女"/>女
-                </div>
+            <div class="form-group">
+                <label>性别：</label>
+                <input type="radio" name="sex" value="男" checked="checked"/>男
+                <input type="radio" name="sex" value="女"/>女
+            </div>
 
-                <div class="form-group">
-                    <label>年龄：</label>
+            <div class="form-group">
+                <label>年龄：</label>
                     <input type="text" class="form-control"  name="age" value="<%=user.getAge()%>" >
                 </div>
 

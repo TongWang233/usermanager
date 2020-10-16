@@ -24,10 +24,18 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<script type="text/javascript">
+    <%
+                String msg = (String) session.getAttribute("msg");
+                if (msg!=""&&msg!=null) {
+                    out.print("alert('"+msg+"');");
+                    session.setAttribute("msg","");
+                }
+    %>
+</script>
 <div class="container">
     <center><h3>添加联系人页面</h3></center>
-    <form action="addUserServlet" method="post">
+    <form action="${pageContext.request.contextPath}/addUserServlet" method="post">
         <div class="form-group">
             <label for="name">姓名：</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="请输入姓名">

@@ -9,27 +9,27 @@
 
     <!-- 1. 导入CSS的全局样式 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
-    <script src="js/jquery-2.1.0.min.js"></script>
-    <!-- 3. 导入bootstrap的js文件 -->
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-    </script>
-	<script type="text/javascript">
-		function refreshCode() {
-			let img = document.getElementById("vcode");
-			let date = new Date().getTime();
-			img.src="checkCodeServlet?"+date;
-		}
-	</script>
+      <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+      <script src="js/jquery-2.1.0.min.js"></script>
+      <!-- 3. 导入bootstrap的js文件 -->
+      <script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+      </script>
+      <script type="text/javascript">
+          function refreshCode() {
+              let img = document.getElementById("vcode");
+              let date = new Date().getTime();
+              img.src = "${pageContext.request.contextPath}/checkCodeServlet?" + date;
+          }
+      </script>
   </head>
   <body>
-  	<div class="container" style="width: 400px;">
-  		<h3 style="text-align: center;">管理员登录</h3>
-        <form action="userLoginServlet" method="post">
-	      <div class="form-group">
-	        <label for="user">用户名：</label>
-	        <input type="text" name="user" class="form-control" id="user" placeholder="请输入用户名"/>
+  <div class="container" style="width: 400px;">
+      <h3 style="text-align: center;">管理员登录</h3>
+      <form action="userLoginServlet" method="post">
+          <div class="form-group">
+              <label for="user">用户名：</label>
+              <input type="text" name="user" class="form-control" id="user" placeholder="请输入用户名"/>
 
 	      </div>
 	      
