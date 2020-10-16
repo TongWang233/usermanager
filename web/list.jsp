@@ -40,7 +40,7 @@
     %>
 
     function delUser(id) {
-        if (confirm("您确定删除本条记录吗?")) {
+        if (confirm("您确定删除本条记录吗1?")) {
             location.href = "${pageContext.request.contextPath}/deleteUserServlet?id=" + id;
         }
     }
